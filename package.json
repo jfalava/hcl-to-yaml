@@ -6,9 +6,9 @@
   "private": true,
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "build:windows-x64": "bun build --compile --minify --sourcemap --bytecode --target=bun-windows-x64-modern --define BUILD_VERSION='\"0.1\"' ./src/app.ts --outfile dist/generate-aws-inventory.exe && cd dist && zip generate-aws-inventory-windows-x64.zip generate-aws-inventory.exe",
-    "build:linux-x64": "bun build --compile --minify --sourcemap --bytecode --target=bun-linux-x64-modern --define BUILD_VERSION='\"0.1\"' ./src/app.ts --outfile dist/generate-aws-inventory && cd dist && zip generate-aws-inventory-linux-x64.zip generate-aws-inventory",
-    "build:macOS-arm": "bun build --compile --minify --sourcemap --bytecode --target=bun-darwin-x64 --define BUILD_VERSION='\"0.1\"' ./src/app.ts --outfile dist/generate-aws-inventory.app && cd dist && zip generate-aws-inventory-macos-arm.zip generate-aws-inventory.app",
+    "build:windows-x64": "bun build --compile --minify --sourcemap --bytecode --target=bun-windows-x64-modern --define BUILD_VERSION='\"0.1\"' ./src/app.ts --outfile dist/hcl-to-yaml.exe && cd dist && zip hcl-to-yaml-windows-x64.zip hcl-to-yaml.exe",
+    "build:linux-x64": "bun build --compile --minify --sourcemap --bytecode --target=bun-linux-x64-modern --define BUILD_VERSION='\"0.1\"' ./src/app.ts --outfile dist/hcl-to-yaml && cd dist && zip hcl-to-yaml-linux-x64.zip hcl-to-yaml",
+    "build:macOS-arm": "bun build --compile --minify --sourcemap --bytecode --target=bun-darwin-x64 --define BUILD_VERSION='\"0.1\"' ./src/app.ts --outfile dist/hcl-to-yaml.app && cd dist && zip hcl-to-yaml-macos-arm.zip hcl-to-yaml.app",
     "build:all": "bun run build:windows-x64 && bun run build:linux-x64 && bun run build:macOS-arm",
     "format": "prettier --write ."
   },
