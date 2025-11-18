@@ -1,5 +1,4 @@
 import yaml from "js-yaml";
-import { writeFileSync } from "node:fs";
 import type { HCLValue } from "../parser/parser";
 
 /**
@@ -10,10 +9,13 @@ import type { HCLValue } from "../parser/parser";
  *
  * @example
  * ```typescript
- * writeYAML({ key: "value" }, "output.yaml");
+ * await writeYAML({ key: "value" }, "output.yaml");
  * ```
  */
-export function writeYAML(data: Record<string, HCLValue>, outPath: string): void {
+export async function writeYAML(
+  data: Record<string, HCLValue>,
+  outPath: string,
+): Promise<void> {
   const yamlStr = yaml.dump(data, { noRefs: true, sortKeys: false });
-  writeFileSync(outPath, yamlStr, "utf8");
+  await Bun.write(outPath, yamlStr);
 }

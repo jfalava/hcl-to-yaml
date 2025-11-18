@@ -1,14 +1,15 @@
 {
   "name": "hcl-parser",
-  "version": "0.1",
+  "version": "0.1.0",
   "module": "index.ts",
   "type": "module",
   "private": true,
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "build:windows-x64": "bun build --compile --minify --sourcemap --bytecode --target=bun-windows-x64-modern --define BUILD_VERSION='\"0.1\"' ./src/app.ts --outfile dist/hcl-to-yaml.exe && cd dist && zip hcl-to-yaml-windows-x64.zip hcl-to-yaml.exe",
-    "build:linux-x64": "bun build --compile --minify --sourcemap --bytecode --target=bun-linux-x64-modern --define BUILD_VERSION='\"0.1\"' ./src/app.ts --outfile dist/hcl-to-yaml && cd dist && zip hcl-to-yaml-linux-x64.zip hcl-to-yaml",
-    "build:macOS-arm": "bun build --compile --minify --sourcemap --bytecode --target=bun-darwin-x64 --define BUILD_VERSION='\"0.1\"' ./src/app.ts --outfile dist/hcl-to-yaml.app && cd dist && zip hcl-to-yaml-macos-arm.zip hcl-to-yaml.app",
+    "test": "bun test",
+    "build:windows-x64": "bun build --compile --minify --sourcemap --bytecode --target=bun-windows-x64-modern --define BUILD_VERSION='\"0.1.0\"' ./src/app.ts --outfile dist/hcl-to-yaml.exe && cd dist && zip hcl-to-yaml-windows-x64.zip hcl-to-yaml.exe",
+    "build:linux-x64": "bun build --compile --minify --sourcemap --bytecode --target=bun-linux-x64-modern --define BUILD_VERSION='\"0.1.0\"' ./src/app.ts --outfile dist/hcl-to-yaml && cd dist && zip hcl-to-yaml-linux-x64.zip hcl-to-yaml",
+    "build:macOS-arm": "bun build --compile --minify --sourcemap --bytecode --target=bun-darwin-x64 --define BUILD_VERSION='\"0.1.0\"' ./src/app.ts --outfile dist/hcl-to-yaml.app && cd dist && zip hcl-to-yaml-macos-arm.zip hcl-to-yaml.app",
     "build:all": "bun run build:windows-x64 && bun run build:linux-x64 && bun run build:macOS-arm",
     "format": "prettier --write ."
   },

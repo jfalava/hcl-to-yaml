@@ -52,14 +52,18 @@ export function parseHCL(input: string): Record<string, HCLValue> {
   }
 
   /**
-   * Parses a value (string, number, object, or array).
+   * Parses a value (string, number, boolean, object, or array).
    * @returns Parsed value
    */
   function parseValue(): HCLValue {
     const token = peek();
     if (!token) throw new Error("Unexpected end of input");
 
-    if (token.type === "string" || token.type === "number") {
+    if (
+      token.type === "string" ||
+      token.type === "number" ||
+      token.type === "boolean"
+    ) {
       consume();
       return token.value;
     }
@@ -98,9 +102,18 @@ export function parseHCL(input: string): Record<string, HCLValue> {
     const obj: Record<string, HCLValue> = {};
     consume("symbol", "{");
     while (peek() && peek()!.value !== "}") {
-      const key = consume("identifier").value;
-      consume("symbol", "=");
-      obj[key] = parseValue();
+      const key = consume("identifier").value as string;
+
+      // Check if next token is '=' or '{'
+      const next = peek();
+      if (next && next.type === "symbol" && next.value === "{") {
+        // Nested block without '='
+        obj[key] = parseObject();
+      } else {
+        // Key-value pair with '='
+        consume("symbol", "=");
+        obj[key] = parseValue();
+      }
     }
     consume("symbol", "}");
     return obj;
@@ -113,7 +126,7 @@ export function parseHCL(input: string): Record<string, HCLValue> {
   function parseTopLevel(): Record<string, HCLValue> {
     const result: Record<string, HCLValue> = {};
     while (peek()) {
-      const key = consume("identifier").value;
+      const key = consume("identifier").value as string;
       const names: string[] = [];
       while (peek() && peek()!.type === "string") {
         const token = consume("string");
